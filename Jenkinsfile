@@ -38,7 +38,7 @@ pipeline {
 
 		stage("Docker Build") {
 			steps {
-				sh "docker build -t vieirapcmdocker/calculator ."
+				sh "docker build -t vieirapcmdocker/calculator:${BUILD_TIMESTAMP} ."
 			}
 		}
 
@@ -65,9 +65,10 @@ pipeline {
 
 		stage("Acceptance test") {
 			steps {
-				// sleep 30
-				// sh "./gradlew acceptanceTest -Dcalculator.url=http://localhost:8765"
-				echo "OK"
+				echo "15 seconds of sleeping... zZzZ"
+				sleep 15
+				sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
+				echo "OK?"
 			}
 		}
 	}
